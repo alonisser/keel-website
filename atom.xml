@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://keel.sh/"/>
+  <link href="https://rusenask.github.io/keel-website/"/>
   <updated>2018-02-11T17:50:06.577Z</updated>
-  <id>https://keel.sh/</id>
+  <id>https://rusenask.github.io/keel-website/</id>
   
   <author>
     <name>Karolis Rusenas</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>first</title>
-    <link href="https://keel.sh/blog/2018/02/11/first/"/>
-    <id>https://keel.sh/blog/2018/02/11/first/</id>
+    <link href="https://rusenask.github.io/keel-website/blog/2018/02/11/first/"/>
+    <id>https://rusenask.github.io/keel-website/blog/2018/02/11/first/</id>
     <published>2018-02-11T17:50:06.000Z</published>
     <updated>2018-02-11T17:50:06.577Z</updated>
     
