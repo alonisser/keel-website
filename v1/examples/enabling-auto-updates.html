@@ -5,18 +5,18 @@
 
   <head>
     <title>
-      Quick Start —  Keel </title>
+      Enabling automated updates —  Keel </title>
     <meta charset="utf-8">
     <meta name="description" content="Fully automated, policy driven continuous Deployment for Kubernetes">    
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Quick Start —  Keel">
-    <meta property="og:description" content="Quick introduction in getting Keel up and running -  Keel">
+    <meta property="og:title" content="Enabling automated updates —  Keel">
+    <meta property="og:description" content="How to automatically update your app -  Keel">
     <meta property="og:image" content="https://keel.sh/images/logo.png ">
 
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Quick Start — Web Relay">
+    <meta name="twitter:title" content="Enabling automated updates — Web Relay">
     <meta name="twitter:description" content="Fully automated, policy driven continuous Deployment for Kubernetes">
     <meta name="twitter:image" content="https://keel.sh/images/logo.png">
 
@@ -51,7 +51,7 @@
     <link rel="stylesheet" href="/css/page.css">
 
     <!-- this needs to be loaded before guide's inline scripts -->      
-    <script>window.PAGE_TYPE = "guide"</script>    
+    <script>window.PAGE_TYPE = "examples"</script>    
 
     <!-- ga -->
     <script>
@@ -87,9 +87,9 @@
   <a class="nav-link current">Learn</a><span class="arrow"></span>
   <ul class="nav-dropdown">
     <li><ul>
-      <li><a href="/v1/guide/" class="nav-link current">Guide</a></li>
+      <li><a href="/v1/guide/" class="nav-link">Guide</a></li>
       <!-- <li><a href="/v1/api/" class="nav-link">API</a></li> -->
-      <li><a href="/v1/examples/" class="nav-link">Examples</a></li>
+      <li><a href="/v1/examples/" class="nav-link current">Examples</a></li>
     </ul></li>
   </ul>
 </li>
@@ -151,9 +151,9 @@
   <a class="nav-link current">Learn</a><span class="arrow"></span>
   <ul class="nav-dropdown">
     <li><ul>
-      <li><a href="/v1/guide/" class="nav-link current">Guide</a></li>
+      <li><a href="/v1/guide/" class="nav-link">Guide</a></li>
       <!-- <li><a href="/v1/api/" class="nav-link">API</a></li> -->
-      <li><a href="/v1/examples/" class="nav-link">Examples</a></li>
+      <li><a href="/v1/examples/" class="nav-link current">Examples</a></li>
     </ul></li>
   </ul>
 </li>
@@ -198,7 +198,7 @@
     </ul>
     <div class="list">      
       <h2>
-        Guide
+        Examples
         
           <select class="version-select">
             <option value="SELF" selected>1.x</option>
@@ -209,98 +209,16 @@
   
     
     
-      
-        <li><h3>Essentials</h3></li>
-      
-      
-      
-      
-      
-      
-   
-    
     
     <li>
-      <a href="/v1/guide/index.html" class="sidebar-link">Introduction</a>
+      <a href="/v1/examples/index.html" class="sidebar-link">Examples</a>
     </li>
   
     
     
-      
-      
-      
-      
-      
-      
-   
-    
     
     <li>
-      <a href="/v1/guide/installation.html" class="sidebar-link">Installation</a>
-    </li>
-  
-    
-    
-      
-      
-      
-      
-      
-      
-   
-    
-    
-    <li>
-      <a href="/v1/guide/quick-start.html" class="sidebar-link current">Quick Start</a>
-    </li>
-  
-    
-    
-      
-      
-        <li><h3>Advanced Configuration</h3></li>
-      
-      
-      
-      
-      
-   
-    
-    
-    <li>
-      <a href="/v1/guide/documentation.html" class="sidebar-link">Documentation</a>
-    </li>
-  
-    
-    
-      
-      
-      
-        <li><h3>Internals</h3></li>
-      
-      
-      
-      
-   
-    
-    
-    <li>
-      <a href="/v1/guide/dev-providers.html" class="sidebar-link">Providers in Depth</a>
-    </li>
-  
-    
-    
-      
-      
-      
-      
-      
-      
-   
-    
-    
-    <li>
-      <a href="/v1/guide/dev-triggers.html" class="sidebar-link">Adding new trigger types</a>
+      <a href="/v1/examples/enabling-auto-updates.html" class="sidebar-link current">Enabling automated updates</a>
     </li>
   
   
@@ -311,54 +229,38 @@
 </div>
 
 
-<div class="content guide with-sidebar quick-start-guide">
+<div class="content examples with-sidebar ">
   
     
   
   
-    <h1>Quick Start</h1>
+    <h1>Enabling automated updates</h1>
   
-  <p>What’s better way to introduce into a system than deploying something?</p>
-<p>In this short tutorial we will demonstrate how to run your service with <a href="https://github.com" target="_blank" rel="noopener">Github</a>, <a href="https://cloud.google.com/kubernetes-engine/" target="_blank" rel="noopener">Google Kubernetes Engine</a> and Keel. We will deploy a simple application that can be then updated automatically by tagging a new release in Github.</p>
-<p>Standard workflow with Keel looks like this:</p>
-<p><img src="/images/keel-workflow.png" alt="Keel Workflow"></p>
-<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><ul>
-<li>Basic knowledge of Kubernetes, containers.</li>
-<li>Google Cloud account, register for a free tier <a href="https://cloud.google.com/free/" target="_blank" rel="noopener">here</a>.</li>
-<li><a href="https://cloud.google.com/kubernetes-engine/" target="_blank" rel="noopener">Provisioned Kubernetes cluster</a>.</li>
+  <p>Once in a while (or more often) you need to update your application that’s running in a cloud-native fashion inside Kubernetes.</p>
+<p>Let’s see how easy it is to do it with Keel.</p>
+<p><img src="/images/keel-quick-start.png" alt="Keel Quick Start"></p>
+<h2 id="Install-Keel"><a href="#Install-Keel" class="headerlink" title="Install Keel"></a>Install Keel</h2><p>Installing Keel is the first step, as long as no update policies are defined in your application deployment files or Helm Charts, Keel will ignore them.<br>You can choose your preferred installation type (kubectl or Helm) to deploy Keel, more details are available <a href="/v1/guide/installation.html">here</a>.</p>
+<h2 id="Specify-update-policy"><a href="#Specify-update-policy" class="headerlink" title="Specify update policy"></a>Specify update policy</h2><p>Our example app is ‘webhook-demo’ which pretty much doesn’t do anything except registering incoming webhooks and showing them. Deployment file can be found here: <a href="https://github.com/webhookrelay/webhook-demo/blob/master/hack/deployment.yml" target="_blank" rel="noopener">https://github.com/webhookrelay/webhook-demo/blob/master/hack/deployment.yml</a>.</p>
+<p>While traditional deployment manifest would look like this:</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span> </span><br><span class="line"><span class="attr">  name:</span> <span class="string">wd</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">default</span></span><br><span class="line"><span class="attr">  labels:</span> </span><br><span class="line"><span class="attr">      name:</span> <span class="string">"wd"</span>  </span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  replicas:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">  template:</span></span><br><span class="line"><span class="attr">    metadata:</span></span><br><span class="line"><span class="attr">      name:</span> <span class="string">wd</span></span><br><span class="line"><span class="attr">      labels:</span></span><br><span class="line"><span class="attr">        app:</span> <span class="string">wd</span>        </span><br><span class="line"><span class="attr">    spec:</span></span><br><span class="line"><span class="attr">      containers:</span>                    </span><br><span class="line"><span class="attr">        - image:</span> <span class="string">karolisr/webhook-demo:0.0.8</span></span><br><span class="line"><span class="attr">          imagePullPolicy:</span> <span class="string">Always</span>            </span><br><span class="line"><span class="attr">          name:</span> <span class="string">wd</span></span><br><span class="line"><span class="attr">          command:</span> <span class="string">["/bin/webhook-demo"]</span></span><br><span class="line"><span class="attr">          ports:</span></span><br><span class="line"><span class="attr">            - containerPort:</span> <span class="number">8090</span>       </span><br><span class="line"><span class="attr">          livenessProbe:</span></span><br><span class="line"><span class="attr">            httpGet:</span></span><br><span class="line"><span class="attr">              path:</span> <span class="string">/healthz</span></span><br><span class="line"><span class="attr">              port:</span> <span class="number">8090</span></span><br><span class="line"><span class="attr">            initialDelaySeconds:</span> <span class="number">30</span></span><br><span class="line"><span class="attr">            timeoutSeconds:</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<p>We need to add Keel policy for updates and optional trigger type.</p>
+<p>These settings have to be specified as labels:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">keel.sh/policy: major</span><br><span class="line">keel.sh/trigger: poll</span><br></pre></td></tr></table></figure>
+<p>Here:</p>
+<ul>
+<li><strong>keel.sh/policy: major</strong> specifies that all - major, minor and patch versions should trigger application update.</li>
+<li><strong>keel.sh/trigger: poll</strong> informs Keel to create an active watcher for the repository that’s specified in the deployment file. For private repositories Keel will use existing secrets that Kubernetes uses to pull the image so no additional configuration required. Polling trigger is useful when webhooks or GCR pubsub is not availabe. If you have PUBSUB enabled for your cluster, then you shouldn’t use polling trigger.</li>
 </ul>
-<blockquote>
-<p>You can also use Docker for Mac with Kubernetes support or Minikube for local testing. Feel free to use your own image/application as the only thing that matters is applied label with the update policy.</p>
-</blockquote>
-<h2 id="Automate-your-image-builds"><a href="#Automate-your-image-builds" class="headerlink" title="Automate your image builds"></a>Automate your image builds</h2><p>We would really encourage to use <a href="http://semver.org/" target="_blank" rel="noopener">SemVer</a> for versioning your images. Git is a single source of truth for your software, so when you tag a new release that should be it — no bug fixes/features can go into that version. If you add something then tag minor or patch release.</p>
-<p>For an example, you can have a look at these tags <a href="https://hub.docker.com/r/keelhq/keel/tags/" target="_blank" rel="noopener">https://hub.docker.com/r/keelhq/keel/tags/</a>. Then, if you look at Github releases <a href="https://github.com/keel-hq/keel/releases" target="_blank" rel="noopener">https://github.com/keel-hq/keel/releases</a> we can see that tags match (except older tags are removed). Easiest way to setup automated builds is with <a href="https://cloud.docker.com" target="_blank" rel="noopener">https://cloud.docker.com</a> or <a href="https://cloud.google.com/container-builder/docs/" target="_blank" rel="noopener">Google Cloud builder</a>. Docker cloud configuration looks like this:</p>
-<p><img src="/images/docker-cloud-config.png" alt="Docker cloud config"></p>
-<p>Our example application will be Keel itself because if a continuous delivery tool cannot upgrade itself then it can’t call itself an automation tool.</p>
-<h2 id="Install-Keel"><a href="#Install-Keel" class="headerlink" title="Install Keel"></a>Install Keel</h2><p>Keel installation is as simple as one deployment file. For our use case, default deployment will be enough:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl create -f deployment-rbac.yaml</span><br></pre></td></tr></table></figure>
-<p>You can learn more on installation types <a href="/v1/guide/installation.html">here</a>.</p>
-<h2 id="Specify-an-update-policy-for-your-app"><a href="#Specify-an-update-policy-for-your-app" class="headerlink" title="Specify an update policy for your app"></a>Specify an update policy for your app</h2><p>We will be adding two configuration labels for Keel:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">keel.sh/policy=major # &lt;- update major, minor and patch versions</span><br><span class="line">keel.sh/trigger=poll # &lt;- tells Keel to create an active watcher to the repository which is used in this deployment</span><br></pre></td></tr></table></figure>
-<p>In this demonstration we will be using example application from here: <a href="https://github.com/webhookrelay/webhook-demo" target="_blank" rel="noopener">https://github.com/webhookrelay/webhook-demo</a> and a corresponding Docker image repository <a href="https://hub.docker.com/r/karolisr/webhook-demo/tags/" target="_blank" rel="noopener">here</a>. Deployment file can be found <a href="https://github.com/webhookrelay/webhook-demo/blob/master/hack/deployment.yml" target="_blank" rel="noopener">here</a>.</p>
-<p>Make sure you set one of the old tags:</p>
+<p>Now, our deployment file looks like this:</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span> </span><br><span class="line"><span class="attr">  name:</span> <span class="string">wd</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">default</span></span><br><span class="line"><span class="attr">  labels:</span> </span><br><span class="line"><span class="attr">      name:</span> <span class="string">"wd"</span></span><br><span class="line">      <span class="string">keel.sh/policy:</span> <span class="string">major</span></span><br><span class="line">      <span class="string">keel.sh/trigger:</span> <span class="string">poll</span>      </span><br><span class="line"><span class="attr">  annotations:</span></span><br><span class="line">      <span class="comment"># keel.sh/pollSchedule: "@every 10m"</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  replicas:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">  template:</span></span><br><span class="line"><span class="attr">    metadata:</span></span><br><span class="line"><span class="attr">      name:</span> <span class="string">wd</span></span><br><span class="line"><span class="attr">      labels:</span></span><br><span class="line"><span class="attr">        app:</span> <span class="string">wd</span>        </span><br><span class="line"><span class="attr">    spec:</span></span><br><span class="line"><span class="attr">      containers:</span>                    </span><br><span class="line"><span class="attr">        - image:</span> <span class="string">karolisr/webhook-demo:0.0.8</span></span><br><span class="line"><span class="attr">          imagePullPolicy:</span> <span class="string">Always</span>            </span><br><span class="line"><span class="attr">          name:</span> <span class="string">wd</span></span><br><span class="line"><span class="attr">          command:</span> <span class="string">["/bin/webhook-demo"]</span></span><br><span class="line"><span class="attr">          ports:</span></span><br><span class="line"><span class="attr">            - containerPort:</span> <span class="number">8090</span>       </span><br><span class="line"><span class="attr">          livenessProbe:</span></span><br><span class="line"><span class="attr">            httpGet:</span></span><br><span class="line"><span class="attr">              path:</span> <span class="string">/healthz</span></span><br><span class="line"><span class="attr">              port:</span> <span class="number">8090</span></span><br><span class="line"><span class="attr">            initialDelaySeconds:</span> <span class="number">30</span></span><br><span class="line"><span class="attr">            timeoutSeconds:</span> <span class="number">10</span></span><br><span class="line"><span class="attr">          securityContext:</span></span><br><span class="line"><span class="attr">            privileged:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>and create it:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl create -f deployment.yml</span><br></pre></td></tr></table></figure>
-<p>Now, sit back and relax, in a minute Keel will update application to the newest version available. Why minute? It’s default polling schedule, you can change it but keep in mind rate limits.</p>
-<h2 id="Wrapping-up"><a href="#Wrapping-up" class="headerlink" title="Wrapping up"></a>Wrapping up</h2><p>In this article we saw how easy it is to get a mini PaaS where on Github release tag using tools like Cloudbuild on docker cloud builder you can get an image with the same version.</p>
-<p>We also saw how easy it is to install Keel and mark deployments for automated updates, just specifying few labels. </p>
+<p>That’s it, we update our deployment with new labels, if you already have your app deployed:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f your-app-deployment.yaml</span><br></pre></td></tr></table></figure>
+<p>And then wait for a few minutes till Keel picks up the changes. </p>
 
-  
-    <div class="guide-links">
-      
-        <span>← <a href="/v1/guide/installation.html">Installation</a></span>
-      
-      
-    </div>
     
   <div class="footer">  
     Caught a mistake or want to contribute to the documentation?
-    <a href="https://github.com/keel-hq/keel-website/blob/master/src/v1/guide/quick-start.md" target="_blank">
+    <a href="https://github.com/keel-hq/keel-website/blob/master/src/v1/examples/enabling-auto-updates.md" target="_blank">
       Edit this page on GitHub!
     </a>
   </div>

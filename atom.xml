@@ -3,11 +3,11 @@
   <title>Keel</title>
   <icon>https://www.gravatar.com/avatar/2dd5b55b44bd3f194b6e1b76d471bffd</icon>
   
-  <link href="/keel-website/atom.xml" rel="self"/>
+  <link href="/atom.xml" rel="self"/>
   
-  <link href="https://rusenask.github.io/keel-website/"/>
+  <link href="https://keel.sh/"/>
   <updated>2018-02-11T17:50:06.577Z</updated>
-  <id>https://rusenask.github.io/keel-website/</id>
+  <id>https://keel.sh/</id>
   
   <author>
     <name>Karolis Rusenas</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>first</title>
-    <link href="https://rusenask.github.io/keel-website/blog/2018/02/11/first/"/>
-    <id>https://rusenask.github.io/keel-website/blog/2018/02/11/first/</id>
+    <link href="https://keel.sh/blog/2018/02/11/first/"/>
+    <id>https://keel.sh/blog/2018/02/11/first/</id>
     <published>2018-02-11T17:50:06.000Z</published>
     <updated>2018-02-11T17:50:06.577Z</updated>
     
