@@ -349,7 +349,7 @@
 </blockquote>
 <p>Add labels:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">keel.sh/policy=force # add this to enable updates of non-semver tags</span><br><span class="line">keel.sh/trigger=poll</span><br></pre></td></tr></table></figure>
-<p>To specify custom polling schedule, check <a href="!--￼17--&gt;#cron-expression-format">cron expression format</a></p>
+<p>To specify custom polling schedule, check <a href="!--￼19--&gt;#cron-expression-format">cron expression format</a></p>
 <blockquote>
 <p><strong>Note</strong> that even if polling trigger is set - webhooks or pubsub events can still trigger updates</p>
 </blockquote>
@@ -491,6 +491,21 @@
 <p>First, get a Slack token, info about that can be found in the <a href="https://get.slack.help/hc/en-us/articles/215770388-Create-and-regenerate-API-tokens" target="_blank" rel="noopener">docs</a>. Then, provide token via <strong>SLACK_TOKEN</strong> environment variable. You should also provide <strong>SLACK_CHANNELS</strong> environment variable with a comma separated list of channels where these notifications should be delivered to.</p>
 <p>Keel will be sending messages when deployment updates succeed or fail.</p>
 <h3 id="Hipchat-notifications"><a href="#Hipchat-notifications" class="headerlink" title="Hipchat notifications"></a>Hipchat notifications</h3><p>Coming soon…</p>
+<h3 id="Mattermost-notifications"><a href="#Mattermost-notifications" class="headerlink" title="Mattermost notifications"></a>Mattermost notifications</h3><p><a href="https://about.mattermost.com/" target="_blank" rel="noopener">Mattermost</a> is an open source Slack alternative, it’s written in Go and React.</p>
+<p>If you don’t have a Mattermost server, you can set one up by using Docker:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --name mattermost-preview -d --publish 8065:8065 mattermost/mattermost-preview</span><br></pre></td></tr></table></figure>
+<p>Server should be reachable on: <a href="http://localhost:8065/" target="_blank" rel="noopener">http://localhost:8065/</a></p>
+<p>Now, enable “incoming webhooks” in your Mattermost server. Documentation can be found <a href="https://docs.mattermost.com/developer/webhooks-incoming.html" target="_blank" rel="noopener">here</a>:</p>
+<p><img src="/images/mattermost-webhooks.png" alt="Mattermost webhooks"></p>
+<p>Also, you should enable icon and username override so users know that webhooks are coming from Keel:</p>
+<p><img src="/images/mattermost-icon-username.png" alt="Mattermost username and icon override"></p>
+<p>Now, set environment variable for Keel with your Mattermost webhook endpoint:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> MATTERMOST_ENDPOINT=<span class="string">"http://your-mattermost:8065/hooks/z45wrrsu6f8o1fxugnpk6wca9h"</span></span><br></pre></td></tr></table></figure>
+<p>That’s it, Keel notifications for Mattermost enabled:</p>
+<p><img src="/images/mattermost-notification.png" alt="Mattermost notification"></p>
+<blockquote>
+<p>If you want to override bot’s username, you can supply <code>MATTERMOST_USERNAME=somethingelse</code> environment variable.</p>
+</blockquote>
 <h3 id="Notification-levels"><a href="#Notification-levels" class="headerlink" title="Notification levels"></a>Notification levels</h3><p>Set notification levels via <code>NOTIFICATION_LEVEL</code> environment variable. Available levels: debug, info, success, warn, error, fatal. This setting defaults to <code>info</code>.</p>
 
   
