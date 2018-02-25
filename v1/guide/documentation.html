@@ -499,14 +499,21 @@
 <p><img src="/images/mattermost-webhooks.png" alt="Mattermost webhooks"></p>
 <p>Also, you should enable icon and username override so users know that webhooks are coming from Keel:</p>
 <p><img src="/images/mattermost-icon-username.png" alt="Mattermost username and icon override"></p>
-<p>Now, set environment variable for Keel with your Mattermost webhook endpoint:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> MATTERMOST_ENDPOINT=<span class="string">"http://your-mattermost:8065/hooks/z45wrrsu6f8o1fxugnpk6wca9h"</span></span><br></pre></td></tr></table></figure>
+<p>Now, set <code>MATTERMOST_ENDPOINT</code> environment variable for Keel with your Mattermost webhook endpoint:</p>
+<p><img src="/images/mattermost-configuration.png" alt="Mattermost configuration"></p>
 <p>That’s it, Keel notifications for Mattermost enabled:</p>
 <p><img src="/images/mattermost-notification.png" alt="Mattermost notification"></p>
 <blockquote>
 <p>If you want to override bot’s username, you can supply <code>MATTERMOST_USERNAME=somethingelse</code> environment variable.</p>
 </blockquote>
 <h3 id="Notification-levels"><a href="#Notification-levels" class="headerlink" title="Notification levels"></a>Notification levels</h3><p>Set notification levels via <code>NOTIFICATION_LEVEL</code> environment variable. Available levels: debug, info, success, warn, error, fatal. This setting defaults to <code>info</code>.</p>
+<h3 id="Overriding-default-channels-per-deployment"><a href="#Overriding-default-channels-per-deployment" class="headerlink" title="Overriding default channels per deployment"></a>Overriding default channels per deployment</h3><p>Some notification providers such as Slack and Hipchat allow apps to send notifications to multiple channels.</p>
+<p>For standard Kubernetes deployments use annotation with channels separated by commas: <code>keel.sh/notify=channelName1,channelName2</code>.</p>
+<p><img src="/images/notify-per-deployment.png" alt="notifications per deployment"></p>
+<p>For Helm chart please specify <code>notificationChannels</code> string list to Keel config section in <em>values.yaml</em>:</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">notificationChannels:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">chan1</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">chan2</span></span><br></pre></td></tr></table></figure>
+<p>Your <em>values.yaml</em> should look like this:</p>
+<p><img src="/images/notify-per-chart.png" alt="notifications per chart"></p>
 
   
     <div class="guide-links">
