@@ -349,7 +349,7 @@
 </blockquote>
 <p>Add labels:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">keel.sh/policy=force # add this to enable updates of non-semver tags</span><br><span class="line">keel.sh/trigger=poll</span><br></pre></td></tr></table></figure>
-<p>To specify custom polling schedule, check <a href="!--￼19--&gt;#cron-expression-format">cron expression format</a></p>
+<p>To specify custom polling schedule, check <a href="!--￼20--&gt;#cron-expression-format">cron expression format</a></p>
 <blockquote>
 <p><strong>Note</strong> that even if polling trigger is set - webhooks or pubsub events can still trigger updates</p>
 </blockquote>
@@ -393,9 +393,22 @@
 <p>Example sidecar container configuration for your <code>deployments.yaml</code>:</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">- image:</span> <span class="string">webhookrelay/webhookrelayd:0.6.0</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">webhookrelayd</span>          </span><br><span class="line"><span class="attr">  env:</span>                         </span><br><span class="line"><span class="attr">    - name:</span> <span class="string">KEY</span></span><br><span class="line"><span class="attr">      valueFrom:</span></span><br><span class="line"><span class="attr">        secretKeyRef:</span></span><br><span class="line"><span class="attr">          name:</span> <span class="string">webhookrelay-credentials</span></span><br><span class="line"><span class="attr">          key:</span> <span class="string">key</span>                </span><br><span class="line"><span class="attr">    - name:</span> <span class="string">SECRET</span></span><br><span class="line"><span class="attr">      valueFrom:</span></span><br><span class="line"><span class="attr">        secretKeyRef:</span></span><br><span class="line"><span class="attr">          name:</span> <span class="string">webhookrelay-credentials</span></span><br><span class="line"><span class="attr">          key:</span> <span class="string">secret</span></span><br><span class="line"><span class="attr">    - name:</span> <span class="string">BUCKET</span></span><br><span class="line"><span class="attr">      value:</span> <span class="string">dockerhub</span></span><br></pre></td></tr></table></figure>
 <h3 id="Google-Cloud-GCR-registry"><a href="#Google-Cloud-GCR-registry" class="headerlink" title="Google Cloud GCR registry"></a>Google Cloud GCR registry</h3><p>If you are using Google Container Engine with Container Registry - search no more, pubsub trigger is for you.</p>
+<p class="tip">You will need to create a Google Service Account to use PubSub functionality.</p>
+
 <p>Since Keel requires access for the pubsub in GCE Kubernetes to work - your cluster node pools need to have permissions. If you are creating a new cluster - just enable pubsub from the start. If you have an existing cluster - currently the only way is to create a new node-pool through the gcloud CLI (more info in the <a href="https://cloud.google.com/sdk/gcloud/reference/container/node-pools/create?hl=en_US&amp;_ga=1.2114551.650086469.1487625651" target="_blank" rel="noopener">docs</a>):</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcloud container node-pools create new-pool --cluster CLUSTER_NAME --scopes https://www.googleapis.com/auth/pubsub</span><br></pre></td></tr></table></figure>
-<p>Make sure that in the deployment.yaml you have set environment variables <strong>PUBSUB=1</strong> and <strong>PROJECT_ID=your-project-id</strong>. </p>
+<h4 id="Create-a-node-pool-with-enabled-pubsub-scope"><a href="#Create-a-node-pool-with-enabled-pubsub-scope" class="headerlink" title="Create a node pool with enabled pubsub scope"></a>Create a node pool with enabled pubsub scope</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcloud container node-pools create new-pool --cluster CLUSTER_NAME --scopes https://www.googleapis.com/auth/pubsub</span><br></pre></td></tr></table></figure>
+<h4 id="Create-a-service-account"><a href="#Create-a-service-account" class="headerlink" title="Create a service account"></a>Create a service account</h4><p>Detailed tutorial on creating and configuring service account to access Google services is available here: <a href="https://cloud.google.com/kubernetes-engine/docs/tutorials/authenticating-to-cloud-platform" target="_blank" rel="noopener">https://cloud.google.com/kubernetes-engine/docs/tutorials/authenticating-to-cloud-platform</a>.</p>
+<p>High level steps:</p>
+<ol>
+<li>Create a service account through Google cloud console with a role: <code>roles/pubsub.editor</code> (Keel needs to create topics as well for GCR registries).</li>
+<li>Furnish a new private key and choose key type as JSON.</li>
+<li><p>Import credentials as a secret:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl create -n &lt;KEEL NAMESPACE&gt; secret generic pubsub-key --from-file=key.json=&lt;PATH-TO-KEY-FILE&gt;.json</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Configure the application with the Secret</p>
+</li>
+</ol>
+<h4 id="Update-Keel’s-environment-variables"><a href="#Update-Keel’s-environment-variables" class="headerlink" title="Update Keel’s environment variables"></a>Update Keel’s environment variables</h4><p>Make sure that in the deployment.yaml you have set environment variables <strong>PUBSUB=1</strong>,  <strong>PROJECT_ID=your-project-id</strong> and <strong>GOOGLE_APPLICATION_CREDENTIALS</strong> to your secrets yaml. </p>
 <h3 id="Polling"><a href="#Polling" class="headerlink" title="Polling"></a>Polling</h3><p>Since only the owners of docker registries can control webhooks - it’s often convenient to use<br>polling. Be aware that registries can be rate limited so it’s a good practice to set up reasonable polling intervals.<br>While configuration for each provider can be slightly different - each provider has to accept several polling parameters:</p>
 <ul>
 <li>Explicitly enable polling trigger</li>
